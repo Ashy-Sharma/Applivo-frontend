@@ -1,0 +1,58 @@
+export type Role = 'USER' | 'DEVELOPER' | 'ADMIN';
+
+export interface UserInfo {
+    id : number;
+    email : string;
+    username : string;
+    role : Role;
+    avatarUrl : string | null;
+}
+
+export interface AuthResponse {
+
+    accessToken : string;
+    refreshToken : string;
+    tokenType : string;
+    userInfo : UserInfo;
+
+}
+
+export interface AppResponse {
+
+    id: number;
+    name: string;
+    description: string | null;
+    category: string | null;
+    iconUrl: string | null;
+    isPublished: boolean;
+    createdAt: string;
+    updatedAt: string;
+    developerId: number;
+    developerUsername: string;
+    versionCount: number;
+
+}
+
+export interface AppVersionResponse {
+
+    versionId: number;
+    versionTag: string;
+    sizeByBytes: number;
+    isActive: boolean;
+    uploadedAt:string;
+
+}
+
+export interface AppDetailResponse extends AppResponse{
+
+    versions: AppVersionResponse[];
+
+}
+
+export interface PageResponse<T> {
+    content : T[];
+    totalElements: number;
+    totalPages: number;
+    size: number;
+    number: number;
+}
