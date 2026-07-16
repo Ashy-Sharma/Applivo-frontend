@@ -4,6 +4,8 @@ import Login from '@/pages/Login';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProtectedRoute from "@/auth/ProtectedRoute.tsx";
+import Discover from "@/pages/Discover.tsx";
+import AppDetails from "@/pages/AppDetails.tsx";
 
 export default function App() {
   return (
@@ -11,18 +13,18 @@ export default function App() {
         <Header />
         <main className="flex-1 w-full max-w-[1280px] mx-auto px-4 md:px-10 py-8">
           <Routes>
-            <Route
-              path="/login" element={<Login />}
-            />
+              <Route path="/login" element={<Login />}/>
+              <Route path="/" element={<Discover />} />
+              <Route path="/apps/:id" element={<AppDetails />} />
 
-            <Route
+              <Route
                 path="/protect-test"
                 element={
                   <ProtectedRoute>
                     <div>You are authenticated.</div>
                   </ProtectedRoute>
                 }
-            />
+              />
           </Routes>
         </main>
         <Footer />

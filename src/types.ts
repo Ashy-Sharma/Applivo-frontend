@@ -56,3 +56,23 @@ export interface PageResponse<T> {
     size: number;
     number: number;
 }
+
+export interface SessionResponse {
+    sessionId: number;
+    appVersionId: number;
+    status: string;
+    wsEndpoint: string;
+    subscriptionTopic: string;
+    startedAt: string;
+    screenWidth: number;
+    screenHeight: number;
+}
+
+export interface SessionStatusResponse {
+    sessionId: number;
+    status: 'CREATING' | 'ACTIVE' | 'FAILED' | 'ENDED' | 'TIMED_OUT';
+    message: string;
+    screenWidth: number | null;
+    screenHeight: number | null;
+}
+
