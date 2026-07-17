@@ -1,11 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
-import Login from '@/pages/Login';
 
+import Login from '@/pages/Login';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProtectedRoute from "@/auth/ProtectedRoute.tsx";
 import Discover from "@/pages/Discover.tsx";
 import AppDetails from "@/pages/AppDetails.tsx";
+import Dashboard from "@/pages/Dashboard.tsx";
+import Upload from '@/pages/Upload';
+import NotFound from "@/pages/NotFound.tsx";
 
 export default function App() {
   return (
@@ -18,13 +21,33 @@ export default function App() {
               <Route path="/apps/:id" element={<AppDetails />} />
 
               <Route
-                path="/protect-test"
-                element={
-                  <ProtectedRoute>
-                    <div>You are authenticated.</div>
-                  </ProtectedRoute>
-                }
+                  path="/dashboard"
+                  element={
+                      <ProtectedRoute allowedRoles={['DEVELOPER', 'ADMIN']}>
+                          <Dashboard />
+                      </ProtectedRoute>
+                  }
               />
+              <Route
+                  path="/dashboard/new"
+                  element={
+                      <ProtectedRoute allowedRoles={['DEVELOPER', 'ADMIN']}>
+                          <Upload />
+                      </ProtectedRoute>
+                  }
+              />
+              <Route
+                  path="/dashboard/:appId/upload"
+                  element={
+                      <ProtectedRoute allowedRoles={['DEVELOPER', 'ADMIN']}>
+                          <Upload />
+                      </ProtectedRoute>
+                  }
+              />
+
+              <Route path="*" element={<NotFound />} />
+
+
           </Routes>
         </main>
         <Footer />

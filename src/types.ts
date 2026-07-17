@@ -76,3 +76,33 @@ export interface SessionStatusResponse {
     screenHeight: number | null;
 }
 
+export interface UploadResponse{
+    versionId: number;
+    versionTag: string;
+    sizeBytes: number;
+    uploadedAt: string;
+    message: string;
+}
+
+export type InteractionType = 'TAP' | 'SWIPE' | 'TEXT' | 'KEY';
+
+export interface InteractionMessage {
+    type: InteractionType;
+    x?: number;
+    y?: number;
+    x2?: number;
+    y2?: number;
+    duration?: number;
+    text?: string;
+    keyCode?: number;
+}
+
+export interface ScreenshotMessage {
+    type: 'SCREENSHOT';
+    data: string;
+    timestamp: string;
+}
+
+
+
+
