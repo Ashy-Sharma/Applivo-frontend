@@ -83,10 +83,14 @@ export default function Emulator() {
   }, [sessionId]);
 
   useEffect(() => {
-    return () => {
+    const handleBeforeUnload = () => {
       if (sessionId) {
         endSession(sessionId).catch(() => undefined);
       }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [sessionId]);
 
@@ -122,6 +126,8 @@ export default function Emulator() {
   };
 
   const handlePointerUp = (e: ReactPointerEvent<HTMLDivElement>) => {
+    console.log("pointer up fired", e.clientX, e.clientY);
+
     const start = pointerDownRef.current;
     pointerDownRef.current = null;
     if (!start || !session?.screenWidth || !session?.screenHeight) {
