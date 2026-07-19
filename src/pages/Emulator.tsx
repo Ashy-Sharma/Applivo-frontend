@@ -12,6 +12,7 @@ import { SESSION_POLL_INTERVAL_MS } from "@/config.ts";
 import { extractErrorMessage } from "@/api/client.ts";
 import {
   ANDROID_KEYCODES,
+  getContainedImageRect,
   mapToEmulatorCoords,
   TAP_MOVEMENT_THRESHOLD_PX,
 } from "@/utils/coordinateMapper.ts";
@@ -112,13 +113,7 @@ export default function Emulator() {
     if (!el) {
       return null;
     }
-    const rect = el.getBoundingClientRect();
-    return {
-      left: rect.left,
-      top: rect.top,
-      width: rect.width,
-      height: rect.height,
-    };
+    return getContainedImageRect(el);
   };
 
   const handlePointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
